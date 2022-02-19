@@ -1,5 +1,4 @@
 import 'package:example/game_controller.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -61,8 +60,8 @@ class _GamePageState extends State<GamePage> {
                   moves: state.moves,
                   canMove: state.canMove,
                   draggable: true,
-                  dragFeedbackSize: kIsWeb ? 1.5 : 2.0,
-                  dragFeedbackOffset: kIsWeb ? Offset(0.0, 0.0) : Offset(0.0, -1.0),
+                  dragFeedbackSize: 1.0, //kIsWeb ? 1.5 : 2.0,
+                  dragFeedbackOffset: Offset.zero, //kIsWeb ? Offset(0.0, 0.0) : Offset(0.0, -1.0),
                 ),
               ),
               if (_hands) _hand(_orientation),
@@ -100,7 +99,8 @@ class _GamePageState extends State<GamePage> {
               theme: widget.theme,
               pieceSet: widget.pieceSet,
               pieces: state.hands[player],
-              fixedPieces: STANDARD_PIECES.map((x) => player == WHITE ? x : x.toLowerCase()).toList(),
+              fixedPieces:
+                  STANDARD_PIECES.map((x) => player == WHITE ? x : x.toLowerCase()).toList(),
               squareSize: 37,
               badgeColour: Colors.blue,
             );

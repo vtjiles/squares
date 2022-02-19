@@ -35,16 +35,17 @@ class GameController extends Cubit<GameState> {
       orientation: this.state.board.orientation,
       player: humanPlayer,
     );
-    PlayState _state = game!.gameOver ? PlayState.finished : (canMove ? PlayState.ourTurn : PlayState.theirTurn);
+    PlayState _state =
+        game!.gameOver ? PlayState.finished : (canMove ? PlayState.ourTurn : PlayState.theirTurn);
     emit(
       GameState(
         state: _state,
-        thinking: thinking,
+        // thinking: thinking,
         size: size,
         board: board,
         moves: moves,
-        hands: game!.handSymbols(),
-        history: game!.history.where((x) => x.move != null).map((m) => convertBishopMove(m.move!)).toList(),
+        // hands: game!.handSymbols(),
+        // history: game!.history.where((x) => x.move != null).map((m) => convertBishopMove(m.move!)).toList(),
       ),
     );
   }
@@ -133,8 +134,8 @@ class GameState extends Equatable {
     this.thinking = false,
     this.history = const [],
   });
-  factory GameState.initial() =>
-      GameState(state: PlayState.idle, size: BoardSize.standard(), board: BoardState.empty(), moves: []);
+  factory GameState.initial() => GameState(
+      state: PlayState.idle, size: BoardSize.standard(), board: BoardState.empty(), moves: []);
 
   GameState copyWith({
     PlayState? state,
